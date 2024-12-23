@@ -13,8 +13,14 @@ public:
 	Library(string n,string adr,int bn,int sn)
 		:name(n),address(adr),book_num(bn),staff_num(sn){}
 	void show();
-	friend void add_book(Library obj);
-	friend void add_staff(Library obj);
+	inline int get_bookn() {
+		return book_num;
+	}
+	inline int get_staffn() {
+		return staff_num;
+	}
+	friend void add_book(Library* obj);
+	friend void add_staff(Library* obj);
 };
 class Book {
 	int num;//±àºÅ
@@ -38,10 +44,10 @@ public:
 	friend istream& operator>>(istream& in, Book& obj);
 };
 class People {
+public:
 	string name;
 	int age;
 	string sex;
-public:
 	People(){}
 	People(string na,string s,int a):name(na),sex(s),age(a){}
 };
@@ -64,6 +70,7 @@ public:
 	void borrow_book();
 	void return_book();
 	void search_book();
+	friend istream& operator>>(istream& in, Reader& obj);  
 };
 
 class Admin :public People {
@@ -81,4 +88,6 @@ public:
 	void register_reader();
 	void unregister_reader();
 	void search_book();
+	friend istream& operator>>(istream& in, Admin& obj);
 };
+Library library("Library of Xi'an University of Technology", "Xi'an", 0, 0);
